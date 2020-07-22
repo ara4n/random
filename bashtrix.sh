@@ -13,7 +13,7 @@ TOKEN=`curl -s -X POST $SERVER/_matrix/client/r0/login --data '{ "type": "m.logi
 ROOM_ID=`curl -s "$SERVER/_matrix/client/r0/directory/room/$ROOM" | jq -r .room_id`
 
 # check that you're joined to the room (redundant if you know you're already there)
-curl -s -X POST "$SERVER/_matrix/client/r0/join/$ROOM?access_token=$TOKEN" > /dev/null
+curl -s -X POST "$SERVER/_matrix/client/r0/join/$ROOM_ID?access_token=$TOKEN" > /dev/null
 
 # clean up the sync loop nicely on exit
 trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
